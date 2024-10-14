@@ -3,17 +3,17 @@ name: Firebase CI/CD
 on:
   push:
     branches:
-      - main  # Or your default branch
+      - main  # You can change this to your default branch
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '16'
@@ -21,13 +21,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build project
+    - name: Build the project
       run: npm run build
 
-    - name: Deploy to Firebase
+    - name: Deploy to Firebase Hosting
       uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+        FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
