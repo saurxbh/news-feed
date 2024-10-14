@@ -28,7 +28,7 @@ const Dashboard = () => {
                 <Link
                     to="/categories"
                     className='btn btn-primary w-100 mt-3'>
-                    Categories
+                    Category
                 </Link>
             </Card.Body>
         </Card>
